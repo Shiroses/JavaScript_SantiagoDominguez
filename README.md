@@ -4,7 +4,13 @@ In this repository, you will find a collection of JavaScript projects and exerci
 
 ## 📁 Project Structure
 
-
+```md
+.
+└───Clase-1
+    ├───css
+    ├───scripts
+    └───index.html
+```
 
 ## ⚙️ Installation & Usage
 
