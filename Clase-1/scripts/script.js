@@ -5,7 +5,13 @@ function new_camper(){
     try {
         let newCamper = [
             names = "nombre",
-            surName = "apellido"
+            surName = "apellido",
+            id = "cedula",
+            address = "dirección de residencia",
+            attendant = "acudiente",
+            contact = "numero de contacto",
+            status = "estado",
+            risk = "riesgo"
         ]
         for (let i = 0; i < newCamper.length; i++){
             infoInput = prompt("Ingrese su " + newCamper[i]);
