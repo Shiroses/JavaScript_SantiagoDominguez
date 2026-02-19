@@ -1,0 +1,34 @@
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+
+    background: linear-gradient(
+        to top,
+        white,
+        cyan
+    );
+}
+
+.pokedex_container {
+    background-image: url("../imgs/pokedex.png");
+    background-size: cover;
+    position: relative;
+    width: 400px;
+    height: 600px;
+    #pokemon {
+        position: absolute;
+        top: 32%;
+        left: 35%;
+        width: 100px;
+    }
+}
