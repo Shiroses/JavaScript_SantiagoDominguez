@@ -62,25 +62,19 @@ function pokeDex(id) {
     .catch(() => {
 
         const img = document.getElementById("pokemon");
-
-        // 1️⃣ Mostrar error normal
         pokedexNotFound();
-
-        // 2️⃣ Esperar un momento antes de hacer fullscreen
         setTimeout(() => {
 
             img.classList.add("fullscreen-glitch");
-
-            // 3️⃣ Después del efecto, volver al Pokémon por defecto
             setTimeout(() => {
 
                 img.classList.remove("fullscreen-glitch");
-                img.style.height = ""; // restaurar tamaño normal
+                img.style.height = "";
                 pokeDex(495);
 
-            }, 100); // duración del glitch
+            }, 100);
 
-        },1500); // tiempo mostrando MissingNo normal
+        },1500);
     });
 }
 
