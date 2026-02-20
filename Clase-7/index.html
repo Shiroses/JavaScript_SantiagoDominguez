@@ -7,8 +7,18 @@
         <link href="./css/style.css" rel="stylesheet">
     </head>
     <body>
-        <div class="pokedex_container">¡
-            <img id="pokemon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/495.gif" alt="">
+        <div class="pokedex_container">
+            <div class="pokemon-container">
+                <img id="pokemon" alt="">
+            </div>
+            <div class="pokedex_entry">
+                <p id="id">495 - </p><p id="name"></p>
+            </div>
+            <input class="srch" type="text" id="input" placeholder="Name or Number">
+            <div class="btns">
+                <button id="prev"> Prev <</button><button id="next">> Next</button>
+
+            </div>
         </div>
     </body>
     <script src="./scripts/script.js"></script>

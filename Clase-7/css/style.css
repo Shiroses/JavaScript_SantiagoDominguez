@@ -1,9 +1,10 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Oxanium', cursive;
 }
 body {
     display: flex;
@@ -20,15 +21,124 @@ body {
 }
 
 .pokedex_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     background-image: url("../imgs/pokedex.png");
     background-size: cover;
     position: relative;
     width: 400px;
     height: 600px;
-    #pokemon {
+
+    .pokemon-container {
         position: absolute;
-        top: 32%;
-        left: 35%;
-        width: 100px;
+        top: 160px;
+        left: 62px;
+
+        width: 242px;
+        height: 162px;
+
+        #pokemon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+        }
+    }
+    
+    .pokedex_entry {
+        display: flex;
+
+        position: absolute;
+        bottom: 40%;
+        right: 25%;
+
+        font-size: 20px;
+        font-weight: 600;
+
+        gap: 8px;
+
+        #id {
+            color: #666;
+        }
+        #name {
+            color: rgb(49, 49, 49);
+        }
+
+    }
+    .srch {
+        position: absolute;
+
+        width: 68%;
+        
+        bottom: 26%;
+        left: 12%;
+        gap: 20px;
+
+        border-radius: 6px;
+        border: 2px rgb(26, 26, 26) solid;
+        box-shadow:-2px 4px 0 #666, -4px 8px 0px rgba(0, 0, 0, 0.3);
+
+        font-size: large;
+
+        padding: 12px;
+
+        &::placeholder {
+            color: #666;
+        }
+    }
+    .btns {
+        display: flex;
+
+        position: absolute;
+        bottom: 7%;
+        left: 12%;
+        gap: 25px;
+
+        color: white;
+
+        #prev {
+            font-weight: 600;
+            font-size: large;
+            padding: 10px 35px;
+
+            color: white;
+
+            background-color: rgb(68, 68, 68);
+
+            border-radius: 6px;
+            border: 2px rgb(5, 5, 5) solid;
+            box-shadow:-2px 4px 0 #1d1d1d, -4px 8px 0px rgb(0, 0, 0);
+
+            &:active {
+
+                transform: translateY(6px);
+                box-shadow:
+                    1px -2px 0px #1d1d1d;
+            }
+        }
+        #next {
+            font-weight: 600;
+            font-size: large;
+            padding: 10px 35px;
+
+            color: white;
+            
+            background-color: rgb(68, 68, 68);
+
+            border-radius: 6px;
+            border: 2px rgb(0, 0, 0) solid;
+            box-shadow:-2px 4px 0 #1d1d1d, -4px 8px 0px rgb(0, 0, 0);
+
+            &:active {
+
+                transform: translateY(6px);
+                box-shadow:
+                    1px -2px 0px #1d1d1d;
+            }
+        }
     }
 }
+
