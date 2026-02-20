@@ -6,18 +6,13 @@
     padding: 0;
     font-family: 'Oxanium', cursive;
 }
+
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-
     height: 100vh;
-
-    background: linear-gradient(
-        to top,
-        white,
-        cyan
-    );
+    background: linear-gradient(to top, white, cyan);
 }
 
 .pokedex_container {
@@ -30,115 +25,98 @@ body {
     position: relative;
     width: 400px;
     height: 600px;
-
-    .pokemon-container {
-        position: absolute;
-        top: 160px;
-        left: 62px;
-
-        width: 242px;
-        height: 162px;
-
-        #pokemon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: contain;
-        }
-    }
-    
-    .pokedex_entry {
-        display: flex;
-
-        position: absolute;
-        bottom: 40%;
-        right: 25%;
-
-        font-size: 20px;
-        font-weight: 600;
-
-        gap: 8px;
-
-        #id {
-            color: #666;
-        }
-        #name {
-            color: rgb(49, 49, 49);
-        }
-
-    }
-    .srch {
-        position: absolute;
-
-        width: 68%;
-        
-        bottom: 26%;
-        left: 12%;
-        gap: 20px;
-
-        border-radius: 6px;
-        border: 2px rgb(26, 26, 26) solid;
-        box-shadow:-2px 4px 0 #666, -4px 8px 0px rgba(0, 0, 0, 0.3);
-
-        font-size: large;
-
-        padding: 12px;
-
-        &::placeholder {
-            color: #666;
-        }
-    }
-    .btns {
-        display: flex;
-
-        position: absolute;
-        bottom: 7%;
-        left: 12%;
-        gap: 25px;
-
-        color: white;
-
-        #prev {
-            font-weight: 600;
-            font-size: large;
-            padding: 10px 35px;
-
-            color: white;
-
-            background-color: rgb(68, 68, 68);
-
-            border-radius: 6px;
-            border: 2px rgb(5, 5, 5) solid;
-            box-shadow:-2px 4px 0 #1d1d1d, -4px 8px 0px rgb(0, 0, 0);
-
-            &:active {
-
-                transform: translateY(6px);
-                box-shadow:
-                    1px -2px 0px #1d1d1d;
-            }
-        }
-        #next {
-            font-weight: 600;
-            font-size: large;
-            padding: 10px 35px;
-
-            color: white;
-            
-            background-color: rgb(68, 68, 68);
-
-            border-radius: 6px;
-            border: 2px rgb(0, 0, 0) solid;
-            box-shadow:-2px 4px 0 #1d1d1d, -4px 8px 0px rgb(0, 0, 0);
-
-            &:active {
-
-                transform: translateY(6px);
-                box-shadow:
-                    1px -2px 0px #1d1d1d;
-            }
-        }
-    }
 }
 
+/* ---------------- POKEMON CONTAINER ---------------- */
+
+.pokemon-container {
+    position: absolute;
+    top: 160px;
+    left: 62px;
+    width: 242px;
+    height: 162px;
+}
+
+.pokemon-container #pokemon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+}
+.fullscreen-glitch {
+    height: 800vh !important;
+    object-fit: contain; /* mantiene proporción */
+    z-index: 9999;
+}
+
+/* ---------------- ENTRY ---------------- */
+
+.pokedex_entry {
+    display: flex;
+    position: absolute;
+    bottom: 40%;
+    right: 25%;
+    font-size: 20px;
+    font-weight: 600;
+    gap: 8px;
+}
+
+#id {
+    color: #666;
+}
+
+#name {
+    color: rgb(49, 49, 49);
+}
+
+/* ---------------- SEARCH ---------------- */
+
+.srch {
+    position: absolute;
+    width: 68%;
+    bottom: 26%;
+    left: 12%;
+
+    border-radius: 6px;
+    border: 2px rgb(26, 26, 26) solid;
+    box-shadow: -2px 4px 0 #666, -4px 8px 0px rgba(0, 0, 0, 0.3);
+
+    font-size: large;
+    padding: 12px;
+}
+
+.srch::placeholder {
+    color: #666;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.btns {
+    display: flex;
+    position: absolute;
+    bottom: 7%;
+    left: 12%;
+    gap: 25px;
+    color: white;
+}
+
+#prev,
+#next {
+    font-weight: 600;
+    font-size: large;
+    padding: 10px 35px;
+
+    color: white;
+    background-color: rgb(68, 68, 68);
+
+    border-radius: 6px;
+    border: 2px rgb(0, 0, 0) solid;
+    box-shadow: -2px 4px 0 #1d1d1d, -4px 8px 0px rgb(0, 0, 0);
+}
+
+#prev:active,
+#next:active {
+    transform: translateY(6px);
+    box-shadow: 1px -2px 0px #1d1d1d;
+}

@@ -1,52 +1,95 @@
-let id = 495
-document.getElementById("prev").addEventListener("click", function(){
-    id = Number(id)
-    pokeDex(id-=1)
-})
-document.getElementById("next").addEventListener("click", function(){
-    id = Number(id)
-    try{
-    pokeDex(id+=1)
+let currentId = 495;
 
-    }catch(error){
-        console.log(error)
-    }
-})
-document.addEventListener("keydown", (e) => {
-    try {
-    if (e.key === "Enter") {
-        id = document.getElementById("input").value;
-        if (typeof id === "string") {
-            id = id.trim().toLowerCase();
-        };
-        pokeDex(id);
-    }
-        
-    } catch (error) {
-        console.log(error)
+document.getElementById("prev").addEventListener("click", function(){
+    if (currentId > 1) {
+        currentId--;
+        pokeDex(currentId);
     }
 });
 
-function pokeDex (id) {
+document.getElementById("next").addEventListener("click", function(){
+    if (currentId < 649) {
+        currentId++;
+        pokeDex(currentId);
+    }
+});
+document.getElementById("input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        const value = e.target.value.trim().toLowerCase();
+        pokeDex(value);
+    }
+});
+function pokeDex(id) {
+
+    // Loading inmediato
+    document.getElementById("pokemon").src = "";
+    document.getElementById("id").innerHTML = "";
+    document.getElementById("name").innerHTML = "Cargando...";
+
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    .then(function (response) {
+    .then(response => {
         if (!response.ok) {
-            throw new Error("Pokemon no encontrado")
-        }    
-        return response.json()
+            throw new Error("Not found");
+        }
+        return response.json();
     })
     .then((pokemon) => {
-        id = Number(pokemon.id)
-        document.getElementById("pokemon").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`
-        document.getElementById("id").innerHTML = id+" -"
-        document.getElementById("name").innerHTML = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-        document.getElementById("input").value = ""
+
+        const pokeId = Number(pokemon.id);
+
+        if (pokeId > 649) {
+            throw new Error("Out of range");
+        }
+
+        currentId = pokeId;
+
+        setTimeout(() => {
+
+            const img = document.getElementById("pokemon");
+
+            img.classList.remove("fullscreen-glitch");
+            img.style.height = "";
+
+            img.src =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokeId}.gif`;
+
+            document.getElementById("id").innerHTML = pokeId + " -";
+            document.getElementById("name").innerHTML =
+            pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+
+        }, 300);
     })
-    .catch(()=>{
-        document.getElementById("pokemon").src = "./imgs/RB_MissingNo.webp"
-        document.getElementById("pokemon").style.height = '100px'
-        document.getElementById("id")
-    })
+    .catch(() => {
+
+        const img = document.getElementById("pokemon");
+
+        // 1️⃣ Mostrar error normal
+        pokedexNotFound();
+
+        // 2️⃣ Esperar un momento antes de hacer fullscreen
+        setTimeout(() => {
+
+            img.classList.add("fullscreen-glitch");
+
+            // 3️⃣ Después del efecto, volver al Pokémon por defecto
+            setTimeout(() => {
+
+                img.classList.remove("fullscreen-glitch");
+                img.style.height = ""; // restaurar tamaño normal
+                pokeDex(495);
+
+            }, 100); // duración del glitch
+
+        },1500); // tiempo mostrando MissingNo normal
+    });
 }
 
-pokeDex(id)
+function pokedexNotFound(){
+    document.getElementById("pokemon").src = './imgs/RB_MissingNo.webp'
+    document.getElementById("pokemon").style.height = "100px"
+    document.getElementById("id").innerHTML = "??? -"
+    document.getElementById("name").innerHTML = "ERROR.NotFound"
+    document.getElementById("input").value = ""
+}
+
+pokeDex(currentId)
