@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title></title>
+        <title>Pokedex</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shorcut icon" href="./imgs/favicon-16x16.webp" type="image/x-icon">
         <link href="./css/style.css" rel="stylesheet">
     </head>
     <body>
         <div class="pokedex_container">
+            <audio src="" class="pokeCry"></audio>
             <div class="pokemon-container">
                 <img id="pokemon" alt="">
             </div>
             <div class="pokedex_entry">
                 <p id="id">495 - </p><p id="name"></p>
             </div>
-            <input class="srch" type="text" id="input" placeholder="Name or Number">
+            <input class="srch" type="search" id="input" placeholder="Name or Number">
             <div class="btns">
-                <button id="prev"> Prev <</button><button id="next">> Next</button>
+                <button id="prev"> Prev &lt</button><button id="next">&gt Next</button>
 
             </div>
         </div>

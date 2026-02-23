@@ -1,30 +1,84 @@
+const pokeCry = document.querySelector(".pokeCry");
+const pokeImg = document.querySelector("#pokemon");
+const pokeId = document.querySelector("#id");
+const pokeName = document.querySelector("#name");
+const pokeIndex = document.querySelector("#input");
 let currentId = 495;
 
 document.getElementById("prev").addEventListener("click", function(){
     if (currentId > 1) {
         currentId--;
-        pokeDex(currentId);
+        pokeCry.setAttribute("autoplay", "autoplay")
+
+        renderPokemon(currentId);
     }
 });
 
 document.getElementById("next").addEventListener("click", function(){
     if (currentId < 649) {
         currentId++;
-        pokeDex(currentId);
+        pokeCry.setAttribute("autoplay", "autoplay")
+        renderPokemon(currentId);
     }
 });
 document.getElementById("input").addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const value = e.target.value.trim().toLowerCase();
-        pokeDex(value);
+        pokeCry.setAttribute("autoplay", "autoplay")
+        renderPokemon(value);
     }
 });
-function pokeDex(id) {
 
-    // Loading inmediato
-    document.getElementById("pokemon").src = "";
-    document.getElementById("id").innerHTML = "";
-    document.getElementById("name").innerHTML = "Cargando...";
+
+const fetchPokemon = async (pokeID) =>{
+    const pokeResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
+    if (pokeResponse.status == 200) {
+        const pokeData = await pokeResponse.json();
+        return pokeData;
+    }
+}
+
+const renderPokemon = async (pokemon) => {
+    pokeImg.src = ""
+    pokeId.textContent = ""
+    pokeName.textContent = "Cargando..."
+
+    if (pokemon > 649) {
+        pokedexNotFound();
+        setTimeout(() => {
+            pokeImg.classList.add("fullscreen-glitch");
+            setTimeout(() => {
+                pokeImg.classList.remove("fullscreen-glitch");
+                pokeImg.style.height = "";
+                renderPokemon(495);
+            }, 100);
+
+        },1500);
+        throw new Error("Out of range");
+        
+    }
+
+    const pokeData = await fetchPokemon(pokemon)
+
+    
+    if (pokeData) {
+        setTimeout (() => {
+            pokeCry.src = pokeData.cries.latest
+            pokeImg.src = pokeData.sprites.versions["generation-v"]["black-white"].animated.front_default;
+            pokeName.textContent = pokeData.name;
+            pokeId.textContent = pokeData.id;
+            pokeIndex.value = ""
+        },300)
+    }
+
+}
+
+
+
+function pokeDex(id) {
+    pokeImg.src = "";
+    pokeId.innerHTML = "";
+    pokeName.innerHTML = "Cargando...";
 
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
     .then(response => {
@@ -35,27 +89,25 @@ function pokeDex(id) {
     })
     .then((pokemon) => {
 
-        const pokeId = Number(pokemon.id);
+        const poke_id = Number(pokemon.id);
+        const poke_img = pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default
+        const poke_cry = pokemon.cries.latest
 
-        if (pokeId > 649) {
+        if (poke_id > 649) {
             throw new Error("Out of range");
         }
 
-        currentId = pokeId;
+        currentId = poke_id;
 
         setTimeout(() => {
+            pokeImg.classList.remove("fullscreen-glitch");
+            pokeImg.style.height = "";
 
-            const img = document.getElementById("pokemon");
-
-            img.classList.remove("fullscreen-glitch");
-            img.style.height = "";
-
-            img.src =
-            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokeId}.gif`;
-
-            document.getElementById("id").innerHTML = pokeId + " -";
-            document.getElementById("name").innerHTML =
-            pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+            pokeImg.src = poke_img
+            pokeId.textContent = poke_id + " -";
+            pokeName.textContent = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+            pokeIndex.value = ""
+            pokeCry.src = poke_cry
 
         }, 300);
     })
@@ -79,11 +131,10 @@ function pokeDex(id) {
 }
 
 function pokedexNotFound(){
-    document.getElementById("pokemon").src = './imgs/RB_MissingNo.webp'
-    document.getElementById("pokemon").style.height = "100px"
-    document.getElementById("id").innerHTML = "??? -"
-    document.getElementById("name").innerHTML = "ERROR.NotFound"
-    document.getElementById("input").value = ""
+    pokeImg.src = './imgs/RB_MissingNo.webp'
+    pokeId.innerHTML = "??? -"
+    pokeName.textContent = "ERROR.NotFound"
+    pokeIndex.value = ""
 }
 
-pokeDex(currentId)
+renderPokemon(currentId)
