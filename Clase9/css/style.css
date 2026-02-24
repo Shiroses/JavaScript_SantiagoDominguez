@@ -1,4 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 * {
     padding: 0;
     margin: 0;
+
+    font-family: 'Montserrat';
+    font-weight: 700;
+    color: white;
+}
+
+body {
+    height: 100vh;
+
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+
+    background-image: radial-gradient(circle, rgb(48 136 52), rgb(26 75 28));
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+
+    gap: 30px;
+}
+
+.container_gamba, .container_board, .card {
+    opacity: 0;
+    visibility: hidden; 
+    
+    transform: translateX(-300px); 
+    transition: opacity 0.8s ease, transform 0.8s ease-out, visibility 0.8s;
+}
+.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0); 
+}
+
+.draw {
+    cursor: pointer;
+    z-index: 999;
+
+    position: absolute;
+    top: 50%;
+
+    border-radius: 0 !important;
+
+    width: 200px;
+
+    transform: translateY(-50%);
+}
+.container_card:hover {
+    border-radius: 8px;
+    box-shadow: 0px 0px 32px black
+}
+
+.goes-up, .goes-down,.draw {
+    padding: 8px;
+
+    background-color: #d23737;
+    
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1.4rem;
+}
+.goes-up:hover, .goes-down:hover {
+    padding: 8px;
+
+    background-color: #000;
+    
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1.4rem;
+
+    cursor: pointer;
 }

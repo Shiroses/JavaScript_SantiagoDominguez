@@ -1,0 +1,97 @@
+body {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+
+    height: 100vh;
+
+    position: relative;
+}
+
+.board {
+    display: flex;
+    justify-content: space-between;
+
+    height: 50%;
+
+    padding: 30px 100px;
+}
+.board__caravan {
+    display: flex;
+    gap: 60px;
+}
+
+.board--player-two {
+    border-top: 3px black solid;
+}
+
+/* Caravan Boards */
+
+
+.caravan {
+    position: relative;
+    display: block;
+    width: 280px;
+    height: 100%;
+}
+
+.card {
+    border-radius: 10px;
+    position: absolute;
+    height: 200px;
+    top: calc(var(--i, 0) * 40px); 
+    transition: transform 0.2s ease, top 0.2s ease;
+    z-index: var(--i, 0);
+}
+.card:not(.card--row):hover {
+    transform: translateX(-30px);
+}
+.card--row {
+    left: calc(var(--p, 0) * 30px);
+}
+
+.card--row:hover {
+    transform: translateY(-33px);
+}
+
+/* Card Deck */
+
+.board__deck-o-cards {
+    position: relative;
+    height: 100%;
+}
+
+.deck-o-cards {
+    border-radius: 10px;
+    position: relative;
+    height: 200px;
+}
+
+.deck-o-cards--stack-p1 {
+    position: absolute;
+    right: calc(var(--i, 0) * 30px); 
+    transition: transform 0.2s ease, top 0.2s ease;
+}
+
+.deck-o-cards--stack-p2 {
+    position: absolute;
+    left: calc(var(--i, 0) * 30px); 
+    transition: transform 0.2s ease, top 0.2s ease;
+}
+
+
+
+/* Hover Effects */
+
+.deck-o-cards:hover {
+    transform: translateY(-30px);
+}
+.deck-o-cards--back:hover {
+
+    transform: none;
+    box-shadow: 0px 0px 60px;
+}
